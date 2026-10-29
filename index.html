@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LITERASIA - Sistem Informasi Perpustakaan. Jelajahi koleksi buku kami.">
+  <title>LITERASIA | Sistem Informasi Perpustakaan</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar-inner">
+      <a href="#beranda" class="logo" aria-label="LITERASIA - Beranda">
+        <span class="logo-mark">L</span>LITERASIA
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Buka menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-menu" id="nav-menu" aria-label="Navigasi utama">
+        <a href="#beranda">Beranda</a>
+        <a href="#katalog">Katalog Buku</a>
+        <a href="#tentang">Tentang</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="beranda">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <span class="badge">Perpustakaan Digital Karya Rendra Pambudi</span>
+          <h1>Temukan Dunia Baru di Setiap Halaman</h1>
+          <p>
+            LITERASIA menghadirkan koleksi buku pilihan dari berbagai bidang.
+            Cari, pilih, dan kenali buku favoritmu dengan mudah dalam satu tempat.
+          </p>
+          <a href="#katalog" class="btn btn-primary">Jelajahi Koleksi</a>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 320 300" role="img" aria-label="Ilustrasi tumpukan buku">
+            <ellipse cx="160" cy="278" rx="120" ry="12" fill="#1f4d3a" opacity="0.12"/>
+            <rect x="40" y="215" width="240" height="46" rx="6" fill="#163a2b"/>
+            <rect x="52" y="226" width="216" height="6" rx="3" fill="#f5efe0" opacity="0.8"/>
+            <rect x="60" y="165" width="210" height="46" rx="6" fill="#2f6b52"/>
+            <rect x="72" y="176" width="186" height="6" rx="3" fill="#f5efe0" opacity="0.8"/>
+            <rect x="50" y="115" width="220" height="46" rx="6" fill="#c9b27c"/>
+            <rect x="62" y="126" width="196" height="6" rx="3" fill="#163a2b" opacity="0.6"/>
+            <g transform="rotate(-12 200 70)">
+              <rect x="150" y="30" width="110" height="80" rx="6" fill="#1f4d3a"/>
+              <rect x="160" y="42" width="60" height="7" rx="3" fill="#f5efe0"/>
+              <rect x="160" y="56" width="40" height="5" rx="2.5" fill="#f5efe0" opacity="0.6"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATISTIK -->
+    <section class="stats" aria-label="Statistik perpustakaan">
+      <div class="container stats-grid">
+        <div class="stat">
+          <strong id="stat-books">0</strong>
+          <span>Judul Buku</span>
+        </div>
+        <div class="stat">
+          <strong id="stat-categories">0</strong>
+          <span>Kategori</span>
+        </div>
+        <div class="stat">
+          <strong id="stat-available">0</strong>
+          <span>Buku Tersedia</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- KATEGORI -->
+    <section class="section" id="kategori">
+      <div class="container">
+        <div class="section-head">
+          <h2>Kategori Buku</h2>
+          <p>Pilih kategori untuk langsung melihat koleksi yang sesuai.</p>
+        </div>
+        <div class="category-grid" id="category-grid"></div>
+      </div>
+    </section>
+
+    <!-- KATALOG -->
+    <section class="section section-alt" id="katalog">
+      <div class="container">
+        <div class="section-head">
+          <h2>Katalog Buku</h2>
+          <p>Cari berdasarkan judul atau penulis, lalu saring dan urutkan sesuai kebutuhan.</p>
+        </div>
+
+        <div class="controls">
+          <div class="field field-search">
+            <label for="search">Cari buku</label>
+            <input type="search" id="search" placeholder="Ketik judul atau nama penulis..." autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="filter-category">Kategori</label>
+            <select id="filter-category"></select>
+          </div>
+          <div class="field">
+            <label for="sort">Urutkan</label>
+            <select id="sort">
+              <option value="title-asc">Judul (A–Z)</option>
+              <option value="title-desc">Judul (Z–A)</option>
+              <option value="year-desc">Tahun Terbit (Terbaru)</option>
+              <option value="year-asc">Tahun Terbit (Terlama)</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="result-info" id="result-info" aria-live="polite"></p>
+
+        <div class="book-grid" id="book-grid"></div>
+
+        <div class="empty" id="empty-state" hidden>
+          <p class="empty-icon">🔍</p>
+          <h3>Buku tidak ditemukan</h3>
+          <p>Coba gunakan kata kunci lain atau ubah filter kategori.</p>
+          <button class="btn btn-outline" id="reset-btn" type="button">Atur Ulang Pencarian</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TENTANG -->
+    <section class="section" id="tentang">
+      <div class="container about">
+        <div class="about-text">
+          <h2>Tentang LITERASIA</h2>
+          <p>
+            LITERASIA adalah sistem informasi perpustakaan yang membantu pengunjung
+            mengenal dan menemukan koleksi buku dengan cepat. Kami percaya bahwa
+            membaca adalah pintu pertama menuju pengetahuan yang lebih luas.
+          </p>
+          <p>
+            Katalog kami dikelompokkan berdasarkan kategori dan dilengkapi informasi
+            lengkap tentang penulis, penerbit, tahun terbit, serta ketersediaan stok.
+          </p>
+        </div>
+        <ul class="about-list">
+          <li><span>📚</span><div><strong>Koleksi Beragam</strong><p>Dari fiksi hingga teknologi dan sains.</p></div></li>
+          <li><span>⚡</span><div><strong>Pencarian Cepat</strong><p>Temukan buku hanya dengan beberapa ketukan.</p></div></li>
+          <li><span>📱</span><div><strong>Mudah Diakses</strong><p>Nyaman dibuka di laptop, tablet, maupun ponsel.</p></div></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="footer-logo">LITERASIA</p>
+      <p>Sistem Informasi Perpustakaan &middot; RENDRA PAMBUDI | 25.01.53.3001</p>
+      <p class="copyright">&copy; <span id="year"></span> LITERASIA. Semua hak dilindungi.</p>
+    </div>
+  </footer>
+
+  <!-- MODAL DETAIL BUKU -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Tutup detail buku">&times;</button>
+
+      <div class="modal-cover">
+        <img id="modal-cover" src="" alt="">
+      </div>
+
+      <div class="modal-body">
+        <span class="tag" id="modal-category"></span>
+        <h3 id="modal-title"></h3>
+        <p class="modal-author" id="modal-author"></p>
+
+        <dl class="detail-list">
+          <div><dt>Penerbit</dt><dd id="modal-publisher"></dd></div>
+          <div><dt>Tahun Terbit</dt><dd id="modal-year"></dd></div>
+          <div><dt>Stok</dt><dd id="modal-stock"></dd></div>
+          <div><dt>Status</dt><dd id="modal-status"></dd></div>
+        </dl>
+
+        <h4>Deskripsi</h4>
+        <p id="modal-description"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
